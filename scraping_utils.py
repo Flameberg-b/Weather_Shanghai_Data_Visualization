@@ -46,7 +46,7 @@ print(weathers)
 
 
 #将每月数据存入总数据
-with open('weather.csv', "w" ,newline='') as csvfile:
+with open('weather.csv', "w" ,newline='', encoding='utf-8') as csvfile:
     writer = csv.writer(csvfile)
     #写入头部
     writer.writerow(['date', 'high', 'low', 'weather'])
