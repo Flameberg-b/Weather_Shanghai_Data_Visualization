@@ -349,13 +349,25 @@ class WeatherDisplay:
         )
         
         # 添加一些浮动的雾团
-        for _ in range(5):
+        fog_colors = ['#e0e0e0', '#d3d3d3', '#c0c0c0', '#f5f5f5', '#cccccc']
+        stipples = ['gray12', 'gray25', 'gray50', 'gray75']
+        for _ in range(18):
             x = random.randint(0, 800)
             y = random.randint(0, 700)
-            size = random.randint(50, 100)
+            size = random.randint(60, 160)
+            color = random.choice(fog_colors)
+            stipple = random.choice(stipples)
+            # 让部分雾团更扁平
+            if random.random() < 0.5:
+                width = size * random.uniform(1.0, 2.0)
+                height = size * random.uniform(0.5, 1.0)
+            else:
+                width = size
+                height = size
             self.effects_canvas.create_oval(
-                x - size, y - size, x + size, y + size,
-                fill='lightgray', stipple='gray25', tags="fog"
+                x - width//2, y - height//2, x + width//2, y + height//2,
+                fill=color, stipple=stipple, outline='', tags="fog"
+            )
             )
     
     def change_background_color(self, weather_type):
